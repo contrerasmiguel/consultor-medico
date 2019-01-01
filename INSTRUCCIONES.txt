@@ -1,0 +1,239 @@
+Consultor Médico
+=================
+Autor: Miguel Contreras
+C.I. 24401758
+Taller de Lenguajes de Programación
+Sección 01
+
+Este programa posee una base de datos de medicamentos utilizados para algunas enfermedades (VIH/SIDA en este caso).
+Cada condición médica tiene su propia lista de medicamentos. Las principal condición médica del paciente se denota
+de la siguiente forma:
+
+medicamentos('NOMBRE DE LA ENFERMEDAD 1', [
+	MEDICAMENTO 1,
+	MEDICAMENTO 2,
+	...
+	MEDICAMENTO N
+]).
+
+medicamentos('NOMBRE DE LA ENFERMEDAD 2', [
+	MEDICAMENTO 1,
+	MEDICAMENTO 2,
+	...
+	MEDICAMENTO N
+]).
+
+Los elementos de la lista de medicamentos se agregan de la siguiente manera:
+
+medicamento(
+	'NOMBRE DE MARCA 1', 
+	['NOMBRE GENERICO 1',
+	'NOMBRE GENERICO 2',
+	..NOMBRE GENERICO N],
+	['MEDICAMENTO CON RIESGO 1',
+	'MEDICAMENTO CON RIESGO 2',
+	'MEDICAMENTO CON RIESGO N'],
+	['CONDICIÓN MÉDICA 1',
+	'CONDICIÓN MÉDICA 2',
+	'CONDICIÓN MÉDICA N']).
+
+	medicamento(
+	'NOMBRE DE MARCA 2', 
+	['NOMBRE GENERICO 1',
+	'NOMBRE GENERICO 2',
+	..NOMBRE GENERICO N],
+	['MEDICAMENTO CON RIESGO 1',
+	'MEDICAMENTO CON RIESGO 2',
+	'MEDICAMENTO CON RIESGO N'],
+	['CONDICIÓN MÉDICA 1',
+	'CONDICIÓN MÉDICA 2',
+	'CONDICIÓN MÉDICA N']).
+
+Para agregar un nuevo elemento a alguna de las listas (ya sea de nombres genéricos, nombre de los medicamentos riesgosos 
+o nombre de las condiciones médicas riesgosas) solo basta con colocar un punto y coma y el nombre del elemento a agregar
+entre comillas simples, justo antes del corchete que cierra la lista. Por ejemplo, para agregar DIABETES a las condiciones
+médicas riesgosas:
+
+	medicamento(
+	'NOMBRE DE MARCA 2', 
+	['NOMBRE GENERICO 1',
+	'NOMBRE GENERICO 2',
+	..NOMBRE GENERICO N],
+	['MEDICAMENTO CON RIESGO 1',
+	'MEDICAMENTO CON RIESGO 2',
+	'MEDICAMENTO CON RIESGO N'],
+	['CONDICIÓN MÉDICA 1',
+	'CONDICIÓN MÉDICA 2',
+	'CONDICIÓN MÉDICA N','DIABETES']).
+
+Por convención, todos los identificadores están escritos en mayúscula, por lo que será necesario escribirlo de la misma
+manera para hacer cualquier consulta.
+
+Se han creado una serie de consultas planificadas que pueden ser realizadas fácilmente por el usuario:
+
+
+% Muestra una lista de enfermedades que pueden ser consultadas.
+enfermedades_medicables()
+
+
+% Recibe el nombre de un medicamento de marca y muestra una lista
+% de medicamentos genericos relacionados.
+%
+% PARÁMETROS:
+% M -> Cadena de caracteres que representa el nombre del medicamento
+%      de marca.
+nombres_genericos(M)
+	EJEMPLO: nombres_genericos('ATRIPLA').
+
+
+% Recibe el nombre de un medicamento genérico y muestra una lista
+% de medicamentos de marca relacionados.
+%
+% PARAMETROS:
+% G -> Cadena de caracteres que representa el nombre del medicamento
+%      genérico.
+nombres_marcas(G)
+	EJEMPLO: nombres_marcas('DELAVIRDINE').
+
+
+% Recibe el nombre de la enfermedad que padece el paciente y muestra
+% todos las marcas de los medicamentos disponibles.
+%
+% PARÁMETROS:
+% E -> Cadena de caracteres que representa la enfermedad.
+nombres_todos_marcas(E)
+	EJEMPLO: nombres_todos_marcas('VIH/SIDA').
+
+
+% Recibe el nombre de la enfermedad que padece el paciente y muestra
+% todos los nombres genéricos de los medicamentos disponibles.
+%
+% PARÁMETROS:
+% E -> Cadena de caracteres que representa la enfermedad.
+nombres_todos_genericos(E)
+	EJEMPLO: nombres_todos_genericos('VIH/SIDA').
+
+
+% Recibe la enfermedad que padece el paciente, una lista de medicamentos
+% que toma el paciente y una lista de condiciones médicas. Muestra los
+% medicamentos recomendados para tal paciente.
+%
+% PARÁMETROS:
+% E -> Cadena de caracteres que representa la enfermedad que padece el
+%      paciente.
+% M -> Lista de cadenas de caracteres que representan las medicinas que
+%      toma el paciente.
+% C -> Lista de cadenas de caracteres que representan las condiciones
+%      médicas que presenta el paciente.
+medicamentos_recomendados(E,M,C)
+	EJEMPLO: medicamentos_recomendados('VIH/SIDA',[],['HIPERTENSION']).
+	EJEMPLO: medicamentos_recomendados('VIH/SIDA',['DELAVIRIDINE'],['HIPERTENSION']).
+
+
+% Recibe la enfermedad que padece el paciente, una lista de medicamentos
+% que toma el paciente y una lista de condiciones médicas. Muestra los
+% medicamentos no recomendados para tal paciente.
+%
+% PARÁMETROS:
+% E -> Cadena de caracteres que representa la enfermedad que padece el
+%      paciente.
+% M -> Lista de cadenas de caracteres que representan las medicinas que
+%      toma el paciente.
+% C -> Lista de cadenas de caracteres que representan las condiciones
+%      médicas que presenta el paciente.
+medicamentos_no_recomendados(E,M,C)
+	EJEMPLO: medicamentos_no_recomendados('VIH/SIDA',[],['HIPERTENSION']).
+	EJEMPLO: medicamentos_no_recomendados('VIH/SIDA',['DELAVIRIDINE'],['HIPERTENSION']).
+
+
+% Recibe la marca de un medicamento y muestra aquellos pacientes que
+% están en riesgo por usar algún medicamento extra.
+%
+% PARÁMETROS:
+% M -> Cadena de caracteres que representa la marca del medicamento.
+pacientes_en_riesgo_por_medicamento(M)
+	EJEMPLO: pacientes_en_riesgo_por_medicamento('ATRIPLA').
+
+
+% Recibe la marca de un medicamento y muestra aquellos pacientes que
+% están en riesgo por tener alguna condición especial (enfermedad,
+% edad, etc).
+%
+% PARÁMETROS:
+% M -> Cadena de caracteres que representa la marca del medicamento.
+pacientes_en_riesgo_por_condicion(M)
+	EJEMPLO: pacientes_en_riesgo_por_condicion('ATRIPLA').
+
+
+
+Nombres genéricos que ya existen en la base de datos:
+	DELAVIRDINE
+	EFAVIRENZ
+	NEVIRAPINE
+	RIFABUTIN
+	RIFAPENTINE
+	RIFAMPIN
+	ALFUZOSIN
+	PIMOZIDE
+	LOVASTATIN
+	SIMVASTATIN
+	MIDAZOLAM
+	TRIAZOLAM
+	SILDENAFIL
+	CISAPRIDE
+	VORICONAZOLE
+	ABACAVIR
+	DIDANOSINE
+	EMTRICITABINE
+	LAMIVUDINE
+	TENOFOVIR
+	ZALCITABINE
+	ZIDOVUDINE
+	AMIODARONE
+	ARTEMETHER
+	LUMEFANTRINE
+	BUSTINIB
+	CABAZITAXEL
+	ETRAVIRINE
+	ATAZANAVIR
+	FOSAMPRENAVIR
+	ITRACONAZOLE
+	KETOCONAZOLE
+	LURASIDONE
+	RILLPIVIRINE
+
+
+Condiciones que ya existen en la base de datos:
+
+	BAJO POTASIO
+	DESORDEN DE SANGRAMIENTO
+	COLESTEROL ALTO
+	TRIGLICERIDOS ALTOS
+	ENFERMEDAD DEL HIGADO
+	ENFERMEDAD DEL RIÑON
+	ENFERMEDAD DEL CORAZON
+	ATAQUE AL CORAZON
+	ALERGIA A SULFA
+	MEDICINA COLESTEROL ALTO
+	MEDICINA RITMO CARDIACO
+	SEDATIVO
+	DESORDEN DE PANCREAS
+	DIABETES 
+	DESORDEN DE RITMO CARDIACO
+	DESORDEN DE SANGRADO
+	OSTEOPENIA
+	HEPATITIS B
+	SOBREPESO
+	EMBARAZO
+	EPILEPSIA
+	COLVULSIONES
+	ENFERMEDAD MENTAL
+	ANTIPSICOTICO
+	HEPATITIS C
+	SUPRESION DE MEDULA OSEA
+	HIPERTENSION
+	FUMADOR
+	BEBEDOR
+	HLA-B*5701
+	MENOR A 2 AÑOS
+	BAJA DENSIDAD MINERAL DE LOS HUESOS
